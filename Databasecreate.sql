@@ -14,6 +14,8 @@ CREATE TABLE IF NOT EXISTS clientes (
 CREATE TABLE IF NOT EXISTS productos (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(255) NOT NULL,
+    stock INT DEFAULT 0,
+    -- Nueva columna para gestionar el stock
     UNIQUE INDEX idx_nombre (nombre)
 );
 -- Crear una tabla para las compras (relación entre clientes y productos)
@@ -26,8 +28,8 @@ CREATE TABLE IF NOT EXISTS compras (
     FOREIGN KEY (producto_id) REFERENCES productos(id),
     INDEX idx_fecha_compra (fecha_compra)
 );
--- Agregar algunos productos de ejemplo
-INSERT INTO productos (nombre)
-VALUES ('Producto A'),
-    ('Producto B'),
-    ('Producto C');
+-- Agregar algunos productos de ejemplo con stock inicial
+INSERT INTO productos (nombre, stock)
+VALUES ('Producto A', 50),
+    ('Producto B', 30),
+    ('Producto C', 20);
